@@ -1,14 +1,19 @@
 'use client'
-import Navbar from "./component/Navbar";
+import React from "react";
+import Container from "../component/Container";
 import { useSession } from "next-auth/react";
+import Navbar from "../component/Navbar";
 
-export default function Home() {
+const welcomePage = () => {
   const { data: session } = useSession();
+
+  console.log(session)
   return (
     <main className="min-h-screen">
       <Navbar session={session} />
       <div className="p-20">
-        <h1 className="text-8xl">HOME PAGE</h1>
+        <h1 className="text-8xl">Welcome {session?.user.name}</h1>
+        <p>{session?.user.email}</p>
         <hr className="my-3" />
         <p className="max-w-5xl mb-10">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum tenetur
@@ -21,4 +26,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default welcomePage;
